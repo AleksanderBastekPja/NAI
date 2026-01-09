@@ -26,9 +26,8 @@ def load_and_prep_image(image_path):
     img = img.resize((32, 32))
     
     img_array = np.array(img) / 255.0
-    
     # Add batch dimension: (32, 32, 3) -> (1, 32, 32, 3)
-    img_array = np.expand_dims(img_array, axis=0)
+    img_array = np.expand_dims(img_array, axis=1)
     return img_array
 
 def main():

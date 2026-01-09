@@ -43,9 +43,8 @@ def main():
         input_data = np.array([[args.age, args.year, args.nodes]])
 
         prediction = model.predict(input_data)
-        print(prediction)
 
-        predicted_class_index = np.argmax(prediction, axis=1)[0]
+        predicted_class_index = np.argmax(prediction[0])
 
         original_labels = {0: 1, 1: 2}
         final_prediction = original_labels[predicted_class_index]

@@ -28,13 +28,6 @@ def main():
     df = pd.read_csv(file_path)
 
     # 1. Select exactly which columns we want to use as features
-    numerical_cols = [
-        'age', 'years_employed', 'annual_income', 'credit_score', 
-        'credit_history_years', 'savings_assets', 'current_debt', 
-        'loan_amount', 'interest_rate', 'debt_to_income_ratio', 
-        'loan_to_income_ratio', 'payment_to_income_ratio',
-        'defaults_on_file', 'delinquencies_last_2yrs', 'derogatory_marks'
-    ]
     
     categorical_cols = [
         'occupation_status', 'product_type', 'loan_intent'
@@ -58,15 +51,15 @@ def main():
         X, y, test_size=0.2, random_state=42
     )
 
-    # 6. Scaling (Crucial for Dense layers with large values like 'annual_income')
+    # 6. Scaling (Crucial for Dense layers with large values like 'annual_income')z
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
     # 7. Build Model
     model = keras.Sequential([
-        keras.layers.Dense(64, activation='relu', input_shape=(X_train.shape[1],)),
-        keras.layers.BatchNormalization(), # Stabilizes training
+        keras.layers.Dense(64, activation='relu'),
+        keras.layers.BatchNormalization(),
         keras.layers.Dropout(0.2),
         keras.layers.Dense(32, activation='relu'),
         keras.layers.Dense(2, activation='softmax')

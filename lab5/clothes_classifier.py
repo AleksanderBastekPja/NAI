@@ -35,7 +35,7 @@ def preprocess_image(image_path: str) -> np.ndarray:
 
     img_array /= 255.0
 
-    img_array = img_array.reshape(1, 28, 28, 1)
+    img_array = img_array.reshape(1, 28, 28)
     return img_array
 
 
@@ -52,8 +52,7 @@ def main():
 
     validate_files(args.image_path)
     clothes_model = tf.keras.models.load_model("clothes_model.keras")
-    processed_image = preprocess_image(args.image_path)
-    clothes_input = processed_image.squeeze(-1)
+    clothes_input = preprocess_image(args.image_path)
     clothes_prediction = clothes_model.predict(clothes_input)
 
     class_names = [
